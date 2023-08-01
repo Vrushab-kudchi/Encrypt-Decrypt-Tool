@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Encryption & Decryption Tool</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 min-h-screen p-8">
+  <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
+    <h2 class="text-2xl mb-8 text-center">Encryption & Decryption Tool</h2>
+
+    <!-- Encryption Section -->
+    <div class="mb-8">
+      <h3 class="text-xl mb-2 font-medium">Encryption</h3>
+      <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+        <form action="/encrypt" method="post">
+          <label for="secretKey" class="block mb-2 font-medium">Secret Key:</label>
+          <input type="text" id="secretKey" name="secretKey" required
+            class="w-full border rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <label for="plaintext" class="block mt-4 mb-2 font-medium">Plaintext:</label>
+          <input type="text" id="plaintext" name="plaintext" required
+            class="w-full border rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <button type="submit"
+            class="mt-4 bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full">Encrypt</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Decryption Section -->
+    <div>
+      <h3 class="text-xl mb-2 font-medium">Decryption</h3>
+      <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+        <form action="/decrypt" method="post">
+          <label for="secretKeyDecrypt" class="block mb-2 font-medium">Secret Key:</label>
+          <input type="text" id="secretKeyDecrypt" name="secretKeyDecrypt" required
+            class="w-full border rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <label for="encryptedMessage" class="block mt-4 mb-2 font-medium">Encrypted Message:</label>
+          <textarea id="encryptedMessage" name="encryptedMessage" rows="4" required
+            class="w-full border rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-y overflow-auto"
+            placeholder="Paste the encrypted message here..."></textarea>
+          <button type="submit"
+            class="mt-4 bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full">Decrypt</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Result Section -->
+    <div class="mt-8">
+      <h3 class="text-xl mb-2 font-medium">Results</h3>
+      <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+        <div class="mb-4">
+          <h4 class="font-medium mb-2">Encrypted Message:</h4>
+          <textarea id="encryptedMessageResult" rows="4"
+            class="w-full border rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-y overflow-auto"
+            readonly><%= encryptedMessage %></textarea>
+          <button type="button" onclick="copyToClipboard('encryptedMessageResult')"
+            class="mt-2 bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Copy
+            Encrypted</button>
+        </div>
+        <div>
+          <h4 class="font-medium mb-2">Decrypted Message:</h4>
+          <textarea id="decryptedMessageResult" rows="4"
+            class="w-full border rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-y overflow-auto"
+            readonly><%= decryptedMessage %></textarea>
+          <button type="button" onclick="copyToClipboard('decryptedMessageResult')"
+            class="mt-2 bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Copy
+            Decrypted</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function copyToClipboard(elementId) {
+      const element = document.getElementById(elementId);
+      element.select();
+      document.execCommand('copy');
+    }
+  </script>
+</body>
+
+</html>
